@@ -1,33 +1,13 @@
-import HomePage from "./Components/Home/HomePage";
+import { Routes, Route } from "react-router-dom";
+import Main from "./Components/Routes/Main";
+import Header from "./Components/Header/Header";
 function App() {
-  const categories = [
-    {
-      id: 1,
-      title: "Hats",
-    },
-    {
-      id: 2,
-      title: "Jackets",
-    },
-    {
-      id: 3,
-      title: "Sneakers",
-    },
-    {
-      id: 4,
-      title: "Womens",
-    },
-    {
-      id: 5,
-      title: "Mens",
-    },
-  ];
   return (
-    <>
-      <div>
-        <HomePage items={categories} />
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route index element={<Main />} />
+      </Route>
+    </Routes>
   );
 }
 
