@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 const firebaseConfig = {
@@ -21,25 +22,36 @@ provider.setCustomParameters({
   prompt: "select_account",
 });
 export const auth = getAuth();
-
+//sign in method
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
 export const db = getFirestore();
 
-export const userFormAuth = async (userAuth) => {
+export const userFormAuth = async (userAuth, additionalInfo = {}) => {
   const userDocRef = doc(db, "users", userAuth.uid);
   const userData = await getDoc(userDocRef);
   if (!userData.exists()) {
-    const { displayName, email } = userAuth;
+    const { name, email } = userAuth;
     const createdAt = new Date();
     try {
       await setDoc(userDocRef, {
-        displayName,
+        name,
         email,
         createdAt,
+        ...additionalInfo,
       });
     } catch (error) {
       console.log(error.message);
     }
   }
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+export const signiInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
 };
