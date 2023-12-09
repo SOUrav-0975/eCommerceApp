@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   userFormAuth,
 } from "../../../utils/firebase/FirebaseAuth";
+import { UserContext } from "../../../context/UserContext";
 import "./SignUp.scss";
 const defaultFormField = {
   name: "",
@@ -16,7 +17,7 @@ const defaultFormField = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormField);
   const { name, email, password, cfm_password } = formFields;
-
+  const { setCurrentUser } = useContext(UserContext);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
@@ -33,6 +34,7 @@ const SignUp = () => {
         email,
         password
       );
+      setCurrentUser(user);
       await userFormAuth(user, { name });
       setFormFields(defaultFormField);
     } catch (error) {
