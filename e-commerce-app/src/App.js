@@ -14,10 +14,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Header />}>
         <Route index element={<Main />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart-checkout" element={<CartCheckout />} />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="shop/*" element={<Shop />} />
+        <Route path="cart-checkout" element={<CartCheckout />} />
       </Route>
     </Routes>
   );

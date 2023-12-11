@@ -37,7 +37,7 @@ const Header = () => {
             SHOP
           </Link>
           {currentUser ? (
-            <Link className="nav-link" to="/sign-in" onClick={signOutHandler}>
+            <Link className="nav-link" to="/" onClick={signOutHandler}>
               SIGN OUT
             </Link>
           ) : (

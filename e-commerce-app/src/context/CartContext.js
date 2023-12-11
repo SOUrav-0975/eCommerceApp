@@ -33,7 +33,7 @@ const removeCartItem = (cartItems, productToRemove) => {
       : cartItem
   );
 };
-
+//clearItem from cart
 const clearCartItem = (cartItems, cartItemToClear) =>
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 
